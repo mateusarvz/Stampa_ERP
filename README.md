@@ -6,16 +6,6 @@
 
 Aplicativo desktop completo para gerenciamento de clientes, pedidos e artes de estampa em camisas. Desenvolvido em Python com interface gráfica intuitiva e armazenamento de dados em CSV.
 
-## 📋 Índice
-
-- [Características](##características)
-- [Pré-requisitos](##pré-requisitos)
-- [Instalação](##instalação)
-- [Como Usar](##como-usar)
-- [Estrutura de Dados](##estrutura-de-dados)
-- [Compilação](##compilação)
-- [Contribuindo](##contribuindo)
-
 ## ✨ Características
 
 - ✅ **Gestão de Clientes**: Cadastro, edição e exclusão de clientes
