@@ -38,6 +38,7 @@ echo.
 echo Limpando build antigos...
 if exist "build" rmdir /s /q "build" 2>nul
 if exist "dist" rmdir /s /q "dist" 2>nul
+if exist "release" rmdir /s /q "release" 2>nul
 
 echo.
 echo Gerando executavel standalone...
@@ -64,6 +65,16 @@ echo.
 echo ========================================
 echo SUCESSO! Executavel gerado:
 echo   dist\StampaSaaS.exe
+echo.
+echo Criando pasta release...
+if not exist "release" mkdir "release"
+copy /y "dist\StampaSaaS.exe" "release\StampaSaaS.exe" >nul
+if %ERRORLEVEL% neq 0 (
+    echo Erro ao copiar para release.
+    pause
+    exit /b %ERRORLEVEL%
+)
+echo   release\StampaSaaS.exe
 echo.
 echo PRONTO PARA DISTRIBUIR!
 echo Copie para qualquer computador.

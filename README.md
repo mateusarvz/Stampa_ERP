@@ -131,6 +131,8 @@ build_exe.bat
 O instalador gera o desinstalador padrão do Inno Setup e cria um atalho no menu Iniciar chamado `DesinstaladorGeral`.
 A remoção limpa os arquivos instalados e a pasta de dados do app em `%LOCALAPPDATA%\Stampa_SaaS`.
 
+No repositório, também existe o launcher `DesinstaladorGeral.bat`, que roda o script de limpeza automaticamente com clique duplo. Ele tenta remover o app instalado, dados locais, atalhos e a venv local `\.venv_stampa` quando existir.
+
 ## 🐳 Docker (Experimental)
 
 O projeto inclui suporte Docker para ambientes containerizados:

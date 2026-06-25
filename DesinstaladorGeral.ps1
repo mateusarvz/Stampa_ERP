@@ -5,6 +5,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $AppName = 'Stampa SaaS'
+$AppFolderName = 'Stampa SaaS'
 $AppDataFolderName = 'Stampa_SaaS'
 $UserDataRoot = $env:LOCALAPPDATA
 if (-not $UserDataRoot) {
@@ -15,6 +16,29 @@ if (-not $UserDataRoot) {
 }
 
 $DataPath = Join-Path $UserDataRoot $AppDataFolderName
+$InstallPaths = @(
+    (Join-Path $env:ProgramFiles $AppFolderName)
+    (Join-Path ${env:ProgramFiles(x86)} $AppFolderName)
+    (Join-Path $env:LOCALAPPDATA $AppFolderName)
+    (Join-Path $env:USERPROFILE '.venv_stampa')
+)
+
+function Write-Status([string]$Message) {
+    if (-not $Silent) {
+        Write-Host $Message
+    }
+}
+
+function Remove-PathIfExists([string]$PathToRemove) {
+    if ([string]::IsNullOrWhiteSpace($PathToRemove)) {
+        return
+    }
+
+    if (Test-Path $PathToRemove) {
+        Remove-Item -Path $PathToRemove -Recurse -Force
+        Write-Status "Removido: $PathToRemove"
+    }
+}
 
 function Get-UninstallEntries {
     $paths = @(
@@ -47,10 +71,10 @@ function Get-StampaUninstaller {
     }
 
     $fallbacks = @(
-        Join-Path ${env:ProgramFiles} 'Stampa SaaS\unins000.exe',
-        Join-Path ${env:ProgramFiles} 'Stampa SaaS\unins001.exe',
-        Join-Path ${env:ProgramFiles(x86)} 'Stampa SaaS\unins000.exe',
-        Join-Path ${env:ProgramFiles(x86)} 'Stampa SaaS\unins001.exe'
+        (Join-Path $env:ProgramFiles 'Stampa SaaS\unins000.exe')
+        (Join-Path $env:ProgramFiles 'Stampa SaaS\unins001.exe')
+        (Join-Path ${env:ProgramFiles(x86)} 'Stampa SaaS\unins000.exe')
+        (Join-Path ${env:ProgramFiles(x86)} 'Stampa SaaS\unins001.exe')
     )
 
     foreach ($fallback in $fallbacks) {
@@ -71,32 +95,31 @@ function Invoke-CommandLine([string]$CommandLine) {
     return $true
 }
 
-Write-Host 'DesinstaladorGeral: iniciando remoção do Stampa SaaS...'
+Write-Status 'DesinstaladorGeral: iniciando remoção do Stampa SaaS...'
 
 $Uninstaller = Get-StampaUninstaller
 if ($Uninstaller) {
-    Write-Host "Desinstalador encontrado: $Uninstaller"
+    Write-Status "Desinstalador encontrado: $Uninstaller"
     [void](Invoke-CommandLine $Uninstaller)
 } else {
-    Write-Host 'Desinstalador nao encontrado. Seguindo com limpeza local.'
+    Write-Status 'Desinstalador nao encontrado. Seguindo com limpeza local.'
 }
 
-if (Test-Path $DataPath) {
-    Remove-Item -Path $DataPath -Recurse -Force
-    Write-Host "Removido: $DataPath"
+Remove-PathIfExists $DataPath
+
+foreach ($path in $InstallPaths) {
+    Remove-PathIfExists $path
 }
 
 $ShortcutTargets = @(
-    Join-Path ([Environment]::GetFolderPath('CommonDesktopDirectory')) 'Stampa SaaS.lnk',
-    Join-Path ([Environment]::GetFolderPath('DesktopDirectory')) 'Stampa SaaS.lnk',
-    Join-Path ([Environment]::GetFolderPath('CommonPrograms')) 'Stampa SaaS',
-    Join-Path ([Environment]::GetFolderPath('Programs')) 'Stampa SaaS'
+    (Join-Path ([Environment]::GetFolderPath('CommonDesktopDirectory')) 'Stampa SaaS.lnk')
+    (Join-Path ([Environment]::GetFolderPath('DesktopDirectory')) 'Stampa SaaS.lnk')
+    (Join-Path ([Environment]::GetFolderPath('CommonPrograms')) 'Stampa SaaS')
+    (Join-Path ([Environment]::GetFolderPath('Programs')) 'Stampa SaaS')
 )
 
 foreach ($target in $ShortcutTargets) {
-    if (Test-Path $target) {
-        Remove-Item -Path $target -Recurse -Force
-    }
+    Remove-PathIfExists $target
 }
 
-Write-Host 'Desinstalacao concluida.'
+Write-Status 'Desinstalacao concluida.'
