@@ -1,4 +1,4 @@
-# 🎨 Stampa SaaS - Sistema de Gestão de Estampas
+# 🎨 Stampa ERP - Sistema de Gestão de Estampas
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
