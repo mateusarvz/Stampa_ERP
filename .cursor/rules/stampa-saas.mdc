@@ -1,0 +1,13 @@
+---
+description: Contexto do app Stampa SaaS (Tkinter + CSV + Gemini)
+alwaysApply: true
+---
+
+# Stampa SaaS
+
+- App desktop Python com **Tkinter**; código principal em `main.py` (~1500 linhas).
+- Dados em CSV no Windows: `%LOCALAPPDATA%\Stampa_SaaS\` (`CLIENTES.csv`, `PEDIDOS.csv`, pasta `PEDIDO_ARTES`).
+- Integração opcional com **Google Gemini** via `google-generativeai` e chave em `.env` (`GEMINI_API_KEY`).
+- Build: `build_exe.bat` + PyInstaller (`StampaSaaS.spec`); instalador Inno Setup (`StampaSaaSInstaller.iss`).
+- Ambiente virtual do projeto: `.venv_stampa` (não editar arquivos dentro do venv).
+- Preferir mudanças focadas em `main.py`; manter convenções existentes (português em labels/UI e nomes de colunas CSV).

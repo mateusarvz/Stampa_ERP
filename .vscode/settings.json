@@ -1,0 +1,19 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv_stampa/Scripts/python.exe",
+  "python.terminal.activateEnvironment": true,
+  "files.exclude": {
+    "**/.venv_stampa": true,
+    "**/__pycache__": true
+  },
+  "search.exclude": {
+    "**/.venv_stampa": true,
+    "**/build": true,
+    "**/dist": true,
+    "**/__pycache__": true
+  },
+  "files.watcherExclude": {
+    "**/.venv_stampa/**": true,
+    "**/build/**": true,
+    "**/dist/**": true
+  }
+}

@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  stampa-saas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: stampa-saas:latest
+    container_name: stampa-saas-app
+    
+    # GUI mode: X11 forwarding (Linux/Mac) or disabled on Windows WSL2
+    environment:
+      - DISPLAY=${DISPLAY:-:0}
+      - LOCALAPPDATA=/data
+      - APPDATA=/data
+      - PYTHONUNBUFFERED=1
+    
+    # X11 socket para GUI (descomentar se usar Linux/Mac com X11)
+    # volumes:
+    #   - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    #   - /home/$USER/.Xauthority:/home/appuser/.Xauthority:rw
+    
+    volumes:
+      # Data persistence (CSV, DB, arts)
+      - stampa-data:/data
+      # Project code (enable for dev mode - hot reload)
+      # - .:/app
+    
+    ports:
+      # Se usar web server no futuro
+      - "5000:5000"
+      - "8000:8000"
+    
+    # Uncomment next line for interactive terminal + GUI
+    stdin_open: true
+    tty: true
+    
+    # Network config
+    networks:
+      - stampa-network
+    
+    # Restart policy
+    restart: unless-stopped
+
+volumes:
+  stampa-data:
+    driver: local
+
+networks:
+  stampa-network:
+    driver: bridge

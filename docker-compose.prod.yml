@@ -1,0 +1,50 @@
+version: '3.8'
+
+# Prod config: minimal, optimized
+services:
+  stampa-saas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: stampa-saas:latest
+    container_name: stampa-saas-prod
+    
+    environment:
+      - DISPLAY=
+      - LOCALAPPDATA=/data
+      - APPDATA=/data
+      - PYTHONUNBUFFERED=1
+    
+    volumes:
+      # Data only, no code mount
+      - stampa-data-prod:/data
+    
+    ports:
+      - "5000:5000"
+    
+    # No TTY in prod
+    stdin_open: false
+    tty: false
+    
+    networks:
+      - stampa-network-prod
+    
+    restart: always
+    
+    # Resource limits (optional)
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+
+volumes:
+  stampa-data-prod:
+    driver: local
+
+networks:
+  stampa-network-prod:
+    driver: bridge

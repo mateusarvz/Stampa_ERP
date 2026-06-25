@@ -1,0 +1,45 @@
+version: '3.8'
+
+# Dev config: code hot-reload + volumes
+services:
+  stampa-saas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: stampa-saas:dev
+    container_name: stampa-saas-dev
+    
+    environment:
+      - DISPLAY=${DISPLAY:-:0}
+      - LOCALAPPDATA=/data
+      - APPDATA=/data
+      - PYTHONUNBUFFERED=1
+      - DEBUG=1
+    
+    volumes:
+      # Code mount for live editing
+      - .:/app
+      # Data persistence
+      - stampa-data-dev:/data
+      # X11 forwarding (Linux only, uncomment if needed)
+      # - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    
+    ports:
+      - "5000:5000"
+      - "8000:8000"
+    
+    stdin_open: true
+    tty: true
+    
+    networks:
+      - stampa-network-dev
+    
+    restart: unless-stopped
+
+volumes:
+  stampa-data-dev:
+    driver: local
+
+networks:
+  stampa-network-dev:
+    driver: bridge

@@ -1,0 +1,70 @@
+# VCS
+.git
+.gitignore
+.github
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.venv_stampa
+.venv
+venv/
+
+# IDE
+.vscode
+.cursor
+.cursorignore
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+*.exe
+*.dll
+
+# App build artifacts
+build/
+dist/
+*.spec
+*.exe
+*.msi
+*.iss
+
+# Backup
+*BACKUP*
+*.bak
+.env.bak
+
+# Logs
+*.log
+debug_logs/
+
+# Agent/skills
+.agents/
+skills-lock.json
+
+# Temp
+temp/
+tmp/
+*.tmp

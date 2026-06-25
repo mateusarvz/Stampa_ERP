@@ -1,0 +1,8 @@
+.venv_stampa/
+venv/
+__pycache__/
+build/
+dist/
+*.pyc
+.env
+*.spec.bak
