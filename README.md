@@ -8,13 +8,13 @@ Aplicativo desktop completo para gerenciamento de clientes, pedidos e artes de e
 
 ## 📋 Índice
 
-- [Características](#características)
-- [Pré-requisitos](#pré-requisitos)
-- [Instalação](#instalação)
-- [Como Usar](#como-usar)
-- [Estrutura de Dados](#estrutura-de-dados)
-- [Compilação](#compilação)
-- [Contribuindo](#contribuindo)
+- [Características](##características)
+- [Pré-requisitos](##pré-requisitos)
+- [Instalação](##instalação)
+- [Como Usar](##como-usar)
+- [Estrutura de Dados](##estrutura-de-dados)
+- [Compilação](##compilação)
+- [Contribuindo](##contribuindo)
 
 ## ✨ Características
 
