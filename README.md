@@ -126,6 +126,11 @@ build_exe.bat
 3. Clique em "Compile"
 4. O instalador será gerado como `StampaSaaSInstaller.exe`
 
+## Desinstalação
+
+O instalador gera o desinstalador padrão do Inno Setup e cria um atalho no menu Iniciar chamado `DesinstaladorGeral`.
+A remoção limpa os arquivos instalados e a pasta de dados do app em `%LOCALAPPDATA%\Stampa_SaaS`.
+
 ## 🐳 Docker (Experimental)
 
 O projeto inclui suporte Docker para ambientes containerizados:
